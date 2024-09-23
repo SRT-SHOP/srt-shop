@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SRT SHOP</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- Splash Screen avec "Bienvenue" et slogan -->
+    <div id="splash-screen" class="section splash-screen">
+        <h1 class="fade-text" id="welcome-text">Bienvenue dans le SRT SHOP</h1>
+        <p class="fade-text" id="slogan-text">Le meilleur endroit pour trouver vos produits de marques préférés</p>
+        <div id="search-bar" class="search-bar fade-text">
+            <input type="text" placeholder="Rechercher un produit...">
+        </div>
+    </div>
+
+    <!-- Barre de navigation sticky -->
+    <header>
+        <nav id="navbar" class="navbar">
+            <!-- Le menu à gauche -->
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <!-- Logo au centre -->
+            <div class="logo">
+                <img src="logo.png" alt="Logo SRT SHOP">
+            </div>
+            <!-- Barre de recherche qui sera insérée dynamiquement -->
+            <div id="navbar-search-bar"></div>
+            <!-- Raccourcis à droite -->
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link">Accueil</a></li>
+                <li><a href="#categories" class="nav-link">Catégories</a></li>
+                <li><a href="#contacts" class="nav-link">Contacts</a></li>
+                <li><a href="#favorites" class="nav-link">Favoris</a></li>
+                <li><a href="#cart" class="nav-link">Panier</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Menu overlay -->
+    <div id="menu-overlay" class="menu-overlay">
+        <div class="menu-content">
+            <ul>
+                <li><a href="#" class="category" data-category="cat1">Catégorie 1</a>
+                    <ul class="submenu" id="brands-cat1">
+                        <li><a href="#brand1">Marque 1</a></li>
+                        <li><a href="#brand2">Marque 2</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" class="category" data-category="cat2">Catégorie 2</a>
+                    <ul class="submenu" id="brands-cat2">
+                        <li><a href="#brand3">Marque 3</a></li>
+                        <li><a href="#brand4">Marque 4</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" class="category" data-category="cat3">Catégorie 3</a>
+                    <ul class="submenu" id="brands-cat3">
+                        <li><a href="#brand5">Marque 5</a></li>
+                        <li><a href="#brand6">Marque 6</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Carrousel Best Sellers -->
+    <section id="carousel" class="carousel-section section">
+        <div class="carousel">
+            <div class="carousel-item">
+                <div class="carousel-overlay">
+                    <img src="best-seller1.jpg" alt="Best Seller 1">
+                    <div class="overlay-text">Voir le produit</div>
+                </div>
+                <p class="carousel-caption">Article 1</p>
+            </div>
+            <div class="carousel-item">
+                <div class="carousel-overlay">
+                    <img src="best-seller2.jpg" alt="Best Seller 2">
+                    <div class="overlay-text">Voir le produit</div>
+                </div>
+                <p class="carousel-caption">Article 2</p>
+            </div>
+            <div class="carousel-item">
+                <div class="carousel-overlay">
+                    <img src="best-seller3.jpg" alt="Best Seller 3">
+                    <div class="overlay-text">Voir le produit</div>
+                </div>
+                <p class="carousel-caption">Article 3</p>
+            </div>
+        </div>
+        <!-- Flèches de navigation -->
+        <button class="carousel-control prev">&lt;</button>
+        <button class="carousel-control next">&gt;</button>
+        <!-- Points de navigation -->
+        <div class="carousel-indicators">
+            <span class="dot" data-slide="0"></span>
+            <span class="dot" data-slide="1"></span>
+            <span class="dot" data-slide="2"></span>
+        </div>
+    </section>
+
+    <!-- Section des Catégories -->
+    <section id="categories" class="categories-section section">
+        <h2 class="slide-text">Nos Catégories</h2>
+        <div class="category-grid">
+            <div class="category-item">
+                <div class="category-overlay">
+                    <img src="category1.jpg" alt="Catégorie 1">
+                    <div class="overlay-text">Catégorie 1</div>
+                </div>
+            </div>
+            <div class="category-item">
+                <div class="category-overlay">
+                    <img src="category2.jpg" alt="Catégorie 2">
+                    <div class="overlay-text">Catégorie 2</div>
+                </div>
+            </div>
+            <div class="category-item">
+                <div class="category-overlay">
+                    <img src="category3.jpg" alt="Catégorie 3">
+                    <div class="overlay-text">Catégorie 3</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Contacts -->
+    <section id="contacts" class="contacts-section section">
+        <h2>Contacts</h2>
+        <p>Email: contact@srtshop.com</p>
+        <p>Téléphone: +33 1 23 45 67 89</p>
+    </section>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
