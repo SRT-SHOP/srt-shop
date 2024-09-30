@@ -1,23 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Apparition fluide des textes
-    const fadeInText = document.querySelectorAll('.fade-text, .slide-text');
-    const observerOptions = {
-        threshold: 0.1
-    };
+    // Apparition fluide des textes et sections
+    const fadeInText = document.querySelectorAll('.fade-text, .slide-text, .dynamic-text');
+    const observerOptions = { threshold: 0.1 };
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-            } else {
-                entry.target.classList.remove('visible');
             }
         });
     }, observerOptions);
 
-    fadeInText.forEach(text => {
-        observer.observe(text);
-    });
+    fadeInText.forEach(text => observer.observe(text));
 
     // Gestion de la navigation sticky
     const navbar = document.getElementById('navbar');
@@ -36,8 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!searchBarAdded) {
                 const clonedSearchBar = searchBar.cloneNode(true);
                 clonedSearchBar.id = "navbar-search-bar";
-                clonedSearchBar.querySelector('input').style.width = "30%"; // Redimensionnement
-                navbar.insertBefore(clonedSearchBar, document.querySelector('.nav-links'));
+                navbar.querySelector('.nav-links').insertAdjacentElement('beforebegin', clonedSearchBar);
                 searchBarAdded = true;
             }
         } else {
@@ -49,42 +42,27 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Menu Overlay
-    const menuToggle = document.querySelector('.menu-toggle');
-    const menuOverlay = document.getElementById('menu-overlay');
+    // Menu déroulant
+    const dropdowns = document.querySelectorAll('.dropdown');
 
-    menuToggle.addEventListener('click', () => {
-        menuOverlay.classList.toggle('open');
-    });
+    dropdowns.forEach(dropdown => {
+        dropdown.addEventListener('mouseenter', () => {
+            const menu = dropdown.querySelector('.dropdown-menu');
+            menu.style.display = 'flex';
+            setTimeout(() => menu.style.opacity = '1', 50); // Animation de fondu en entrée
+        });
 
-    menuOverlay.addEventListener('click', (event) => {
-        if (event.target === menuOverlay) {
-            menuOverlay.classList.remove('open');
-        }
-    });
-
-    // Animation des sous-menus
-    const categoryLinks = document.querySelectorAll('.category');
-    
-    categoryLinks.forEach(link => {
-        link.addEventListener('click', (event) => {
-            event.preventDefault();
-            const category = event.target.getAttribute('data-category');
-            const submenu = document.getElementById(`brands-${category}`);
-
-            if (submenu) {
-                submenu.classList.toggle('visible');
-            }
+        dropdown.addEventListener('mouseleave', () => {
+            const menu = dropdown.querySelector('.dropdown-menu');
+            menu.style.opacity = '0';
+            setTimeout(() => menu.style.display = 'none', 200); // Animation de fondu en sortie
         });
     });
 
-    // Carrousel automatique et manuel
-    const carousel = document.querySelector('.carousel');
+    // Gestion du carrousel automatique
     const carouselItems = document.querySelectorAll('.carousel-item');
     const dots = document.querySelectorAll('.dot');
     let currentIndex = 0;
-    let isManualScrolling = false;
-    let autoScrollTimeout;
 
     function showSlide(index) {
         carouselItems.forEach((item, i) => {
@@ -95,48 +73,31 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Carousel Auto-scroll
     function autoScroll() {
-        autoScrollTimeout = setInterval(() => {
-            if (!isManualScrolling) {
-                currentIndex = (currentIndex + 1) % carouselItems.length;
-                showSlide(currentIndex);
-            }
-        }, 3000);
-    }
-
-    function stopAutoScroll() {
-        clearInterval(autoScrollTimeout);
-        isManualScrolling = true;
-    }
-
-    function startAutoScroll() {
-        isManualScrolling = false;
-        autoScroll();
-    }
-
-    document.querySelector('.carousel-control.prev').addEventListener('click', () => {
-        stopAutoScroll();
-        currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
-        showSlide(currentIndex);
-        setTimeout(startAutoScroll, 5000); // Reprendre l'auto-scroll après 5 secondes
-    });
-
-    document.querySelector('.carousel-control.next').addEventListener('click', () => {
-        stopAutoScroll();
-        currentIndex = (currentIndex + 1) % carouselItems.length;
-        showSlide(currentIndex);
-        setTimeout(startAutoScroll, 5000); // Reprendre l'auto-scroll après 5 secondes
-    });
-
-    dots.forEach((dot, i) => {
-        dot.addEventListener('click', () => {
-            stopAutoScroll();
-            currentIndex = i;
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % carouselItems.length;
             showSlide(currentIndex);
-            setTimeout(startAutoScroll, 5000); // Reprendre l'auto-scroll après 5 secondes
-        });
-    });
+        }, 4000);
+    }
 
+    // Initial slide display
+    showSlide(currentIndex);
     autoScroll();
 
+    // Témoignages: apparition fluide
+    const testimonials = document.querySelectorAll('.testimonial');
+    testimonials.forEach((testimonial, index) => {
+        setTimeout(() => {
+            testimonial.classList.add('visible');
+        }, index * 200);
+    });
+
+    // Ajout de transitions pour la recherche
+    const searchInputs = document.querySelectorAll('.search-bar input');
+    searchInputs.forEach(input => {
+        input.addEventListener('focus', () => {
+            input.style.transition = 'width 0.5s ease';
+        });
+    });
 });
